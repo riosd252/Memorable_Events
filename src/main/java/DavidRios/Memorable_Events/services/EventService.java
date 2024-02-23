@@ -47,7 +47,13 @@ public class EventService {
     public void addParticipant(UUID eventId, UUID participantId) {
         Event event = this.findById(eventId);
         User user = userService.findById(participantId);
-        event.setParticipants(user);
+        event.setParticipant(user);
+    }
+
+    public void removeParticipant(UUID eventId, UUID participantId) {
+        Event event = this.findById(eventId);
+        User user = userService.findById(participantId);
+        event.removeParticipant(user);
     }
 
     public void delete(UUID id) {
