@@ -1,7 +1,10 @@
 package DavidRios.Memorable_Events.services;
 
+import DavidRios.Memorable_Events.DTOs.NewEvent;
+import DavidRios.Memorable_Events.DTOs.NewUser;
 import DavidRios.Memorable_Events.entities.Event;
 import DavidRios.Memorable_Events.entities.User;
+import DavidRios.Memorable_Events.exceptions.BadRequestException;
 import DavidRios.Memorable_Events.exceptions.NotFoundException;
 import DavidRios.Memorable_Events.repositories.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +35,10 @@ public class EventService {
 
     public Event findById(UUID id) {
         return eventRepository.findById(id).orElseThrow(() -> new NotFoundException("Event identified as: " + id + " was not found."));
+    }
+
+    public Event saveEvent(NewEvent newEvent) {
+        return new Event(newEvent.title(), newEvent.description(), newEvent.date(), newEvent.location(), newEvent.capacity());
     }
 
     public Event update(UUID id, Event modifiedEvent) {

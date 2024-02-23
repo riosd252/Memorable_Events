@@ -1,5 +1,6 @@
 package DavidRios.Memorable_Events.controllers;
 
+import DavidRios.Memorable_Events.DTOs.NewEvent;
 import DavidRios.Memorable_Events.entities.Event;
 import DavidRios.Memorable_Events.entities.User;
 import DavidRios.Memorable_Events.services.EventService;
@@ -41,6 +42,12 @@ public class EventController {
     @PatchMapping("/me/{eventUuid}")
     public Event removeParticipant(@PathVariable UUID eventUuid, @AuthenticationPrincipal User currentAuthenticatedUser) {
         return eventService.addParticipant(eventUuid, currentAuthenticatedUser.getId());
+    }
+
+    @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public Event saveEvent(@RequestBody NewEvent newEvent) {
+       return this.eventService.saveEvent(newEvent);
     }
 
 
