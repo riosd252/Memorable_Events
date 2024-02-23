@@ -44,10 +44,11 @@ public class EventService {
         return eventRepository.save(found);
     }
 
-    public void addParticipant(UUID eventId, UUID participantId) {
+    public Event addParticipant(UUID eventId, UUID participantId) {
         Event event = this.findById(eventId);
         User user = userService.findById(participantId);
         event.setParticipant(user);
+        return event;
     }
 
     public void removeParticipant(UUID eventId, UUID participantId) {
