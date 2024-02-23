@@ -36,4 +36,8 @@ public class Event {
         this.capacity = capacity;
 
     }
+
+    public void setParticipants(User user) {
+        this.participants.add(user);
+    }
 }
