@@ -28,10 +28,10 @@ public class Event {
     @JsonIgnore
     private Set<User> participants = new HashSet<>();
 
-    public Event(String title, String description, LocalDate date, String location, int capacity) {
+    public Event(String title, String description, String date, String location, int capacity) {
         this.title = title;
         this.description = description;
-        this.date = date;
+        this.date = LocalDate.parse(date);
         this.location = location;
         this.capacity = capacity;
 
