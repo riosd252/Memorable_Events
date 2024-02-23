@@ -34,14 +34,15 @@ public class EventController {
         return this.eventService.findById(id);
     }
 
-    @PatchMapping("/me/{eventUuid}")
+    @PatchMapping("/participate/{eventUuid}")
     public Event setParticipant(@PathVariable UUID eventUuid, @AuthenticationPrincipal User currentAuthenticatedUser) {
         return eventService.addParticipant(eventUuid, currentAuthenticatedUser.getId());
     }
 
-    @PatchMapping("/me/{eventUuid}")
-    public Event removeParticipant(@PathVariable UUID eventUuid, @AuthenticationPrincipal User currentAuthenticatedUser) {
-        return eventService.addParticipant(eventUuid, currentAuthenticatedUser.getId());
+    @PatchMapping("/cancel/{eventUuid}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void removeParticipant(@PathVariable UUID eventUuid, @AuthenticationPrincipal User currentAuthenticatedUser) {
+        eventService.removeParticipant(eventUuid, currentAuthenticatedUser.getId());
     }
 
     @PostMapping
