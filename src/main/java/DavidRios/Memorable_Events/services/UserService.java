@@ -30,6 +30,8 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
 
+    public User findByEmail(String email) { return userRepository.findByEmail(email).orElseThrow(() -> new NotFoundException("User with " + email + " was not found."));}
+
     public User update(UUID id, User modifiedUser) {
         User found = this.findById(id);
         found.setUsername(modifiedUser.getUsername());
